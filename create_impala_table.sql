@@ -1,0 +1,1 @@
+create table weatherhistory (Formatted_Date STRING,Summary STRING,Precip_Type STRING,Temperature DOUBLE,Apparent_Temperature DOUBLE,Humidity DOUBLE,Wind_Speed DOUBLE,Wind_Bearing DOUBLE,Visibility DOUBLE,Loud_Cover DOUBLE,Pressure DOUBLE,Daily_Summary STRING) ROW FORMAT DELIMITED FIELDS TERMINTED BY ',' STORED AS TEXTFILE;
