@@ -4,8 +4,8 @@ This repository contains the following components related to this course.
   1. Apache Mapreduce - Maximum Temperature for each year
   2. Apache MapReduce - Top 10 YouTube Categories
   3. Apache HBase - Employee Data Analysis
-  4. Apache Kafka - 
-  5. Apache Kafka - 
+  4. Apache Kafka - Sending Sensor data
+  5. Apache Kafka - Sending Student data and analyzing it
   6. Apache Impala - Weather data analysis
   7. Apache Impala - MLB player analysis
   8. Apache Oozie - Automating sensor data analysis
