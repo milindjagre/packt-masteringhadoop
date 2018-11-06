@@ -1,0 +1,34 @@
+<workflow-app xmlns = "uri:oozie:workflow:0.4" name = "sensor-WF">
+   <start to = "first_node" />
+   <action name = "first_node">
+	<fs>
+            <delete path="hdfs://quickstart.cloudera:8020/packt/oozie/sensor/input"/>
+            <mkdir path="hdfs://quickstart.cloudera:8020/packt/oozie/sensor/input"/>
+	    <chmod path="hdfs://quickstart.cloudera:8020/packt/sensor_data.csv" permissions="-rwxrwxrwx"/>
+	    <chmod path="hdfs://quickstart.cloudera:8020/packt/oozie/sensor/input" permissions="-rwxrwxrwx"/>
+	    <move source="hdfs://quickstart.cloudera:8020/packt/sensor_data.csv" target="hdfs://quickstart.cloudera:8020/packt/oozie/sensor/input"/>
+        </fs>
+      <ok to = "second_node" />
+      <error to = "kill_job" />
+   </action>
+   <action name="second_node">
+        <hive xmlns="uri:oozie:hive-action:0.2">
+            <job-tracker>quickstart.cloudera:9001</job-tracker>
+            <name-node>hdfs://quickstart.cloudera:9000</name-node>
+            <configuration>
+                <property>
+                    <name>mapred.compress.map.output</name>
+                    <value>true</value>
+                </property>
+            </configuration>
+            <script>hive_script.sql</script>
+        </hive>
+        <ok to="end"/>
+        <error to="kill_job"/>
+    </action>
+   <kill name = "kill_job">
+      <message>Job failed</message>
+   </kill>
+   <end name = "end" />
+</workflow-app>
+
