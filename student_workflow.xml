@@ -1,0 +1,22 @@
+<workflow-app xmlns = "uri:oozie:workflow:0.4" name = "student-WF">
+   <start to = "first_node" />
+   <action name="first_node">
+        <hive xmlns="uri:oozie:hive-action:0.2">
+            <job-tracker>quickstart.cloudera:8021</job-tracker>
+            <name-node>hdfs://quickstart.cloudera:8020</name-node>
+            <configuration>
+                <property>
+                    <name>mapred.compress.map.output</name>
+                    <value>true</value>
+                </property>
+            </configuration>
+            <script>student_hive_script.sql</script>
+        </hive>
+        <ok to="end"/>
+        <error to="kill_job"/>
+    </action>
+   <kill name = "kill_job">
+      <message>Job failed</message>
+   </kill>
+   <end name = "end" />
+</workflow-app>
